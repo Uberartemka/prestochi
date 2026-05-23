@@ -3,8 +3,8 @@
    ======================================== */
 
 window.PRESTOCHI_CONFIG = {
-  // Токен подгружается из js/secrets.js (не закоммичен; см. js/secrets.example.js)
-  mapboxToken: (window.PRESTOCHI_SECRETS && window.PRESTOCHI_SECRETS.mapboxToken) || 'PASTE_YOUR_MAPBOX_PUBLIC_TOKEN_HERE',
+  // Mapbox public token (pk.*) — публичный по дизайну; защита через URL-restriction в Mapbox dashboard.
+  mapboxToken: 'pk.eyJ1IjoiaGVyb2RvdHVzNzciLCJhIjoiY21waWdzdnNjMTZxMzJvcjA1dXpudmw2OSJ9.hJ-C3RTqzkVhks9je2wvYw',
 
   mapStyle: 'mapbox://styles/mapbox/light-v11',
 
