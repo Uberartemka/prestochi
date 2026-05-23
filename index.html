@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Компонент Сервис — Презентация для партнёров HHB</title>
+
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;600;800&family=Noto+Sans+SC:wght@300;400;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="theme-dark lang-ru">
+
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-mark">CS</span>
+      <span class="brand-name" data-i18n="brand.name"></span>
+    </div>
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang-set="ru" data-lang-id="ru">RU</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang-set="zh" data-lang-id="zh">中文</button>
+    </div>
+  </header>
+
+  <!-- ================== СЕКЦИЯ 1: ОБЛОЖКА ================== -->
+  <section class="cover">
+    <div class="cover-grid">
+      <div class="cover-text">
+        <div class="cover-eyebrow">
+          <span class="dot-red"></span>
+          <span data-i18n="cover.eyebrow"></span>
+        </div>
+
+        <h1 class="cover-title" data-i18n="cover.title"></h1>
+
+        <div class="lang-secondary cover-zh" data-i18n-sec="cover.title"></div>
+
+        <div class="cover-by" data-i18n="cover.by"></div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" id="scrollCue">
+      <span data-i18n="scroll.cue"></span>
+      <span class="scroll-arrow">↓</span>
+    </div>
+  </section>
+
+  <!-- ================== СЕКЦИЯ 2: КАРТА ================== -->
+  <section class="map-section">
+    <div class="map-sticky">
+      <aside class="info-panel">
+        <div class="info-titles">
+          <div class="eyebrow" data-i18n="map.eyebrow"></div>
+          <h2 data-i18n="map.title"></h2>
+          <p class="subtitle lang-secondary" data-i18n-sec="map.title"></p>
+        </div>
+
+        <div class="counter">
+          <div class="counter-block">
+            <span class="num" id="counter-current">3</span>
+            <span class="label" data-i18n="map.counter.today"></span>
+          </div>
+          <div class="counter-arrow">→</div>
+          <div class="counter-block highlight">
+            <span class="num">85</span>
+            <span class="label" data-i18n="map.counter.goal"></span>
+          </div>
+        </div>
+
+        <ul class="legend">
+          <li>
+            <span class="dot dot-current"></span>
+            <div>
+              <strong data-i18n="map.legend.current.title"></strong>
+              <small data-i18n="map.legend.current.desc"></small>
+            </div>
+          </li>
+          <li>
+            <span class="dot dot-phase1"></span>
+            <div>
+              <strong data-i18n="map.legend.phase1.title"></strong>
+              <small data-i18n="map.legend.phase1.desc"></small>
+            </div>
+          </li>
+          <li>
+            <span class="dot dot-phase2"></span>
+            <div>
+              <strong data-i18n="map.legend.phase2.title"></strong>
+              <small data-i18n="map.legend.phase2.desc"></small>
+            </div>
+          </li>
+          <li>
+            <span class="dot dot-phase3"></span>
+            <div>
+              <strong data-i18n="map.legend.phase3.title"></strong>
+              <small data-i18n="map.legend.phase3.desc"></small>
+            </div>
+          </li>
+        </ul>
+      </aside>
+
+      <div class="map-stage">
+        <div id="map"></div>
+      </div>
+    </div>
+
+    <div class="scroll-steps">
+      <div class="step" data-scene="0">
+        <div class="step-card">
+          <div class="step-eyebrow" data-i18n="step1.eyebrow"></div>
+          <h3 data-i18n="step1.title"></h3>
+          <p data-i18n="step1.text"></p>
+          <p class="lang-secondary" data-i18n-sec="step1.text"></p>
+        </div>
+      </div>
+      <div class="step" data-scene="1">
+        <div class="step-card">
+          <div class="step-eyebrow" data-i18n="step2.eyebrow"></div>
+          <h3 data-i18n="step2.title"></h3>
+          <p data-i18n="step2.text"></p>
+          <p class="lang-secondary" data-i18n-sec="step2.text"></p>
+        </div>
+      </div>
+      <div class="step" data-scene="2">
+        <div class="step-card">
+          <div class="step-eyebrow" data-i18n="step3.eyebrow"></div>
+          <h3 data-i18n="step3.title"></h3>
+          <p data-i18n="step3.text"></p>
+          <p class="lang-secondary" data-i18n-sec="step3.text"></p>
+        </div>
+      </div>
+      <div class="step" data-scene="3">
+        <div class="step-card">
+          <div class="step-eyebrow" data-i18n="step4.eyebrow"></div>
+          <h3 data-i18n="step4.title"></h3>
+          <p data-i18n="step4.text"></p>
+          <p class="lang-secondary" data-i18n-sec="step4.text"></p>
+        </div>
+      </div>
+      <div class="step" data-scene="4">
+        <div class="step-card">
+          <div class="step-eyebrow" data-i18n="step5.eyebrow"></div>
+          <h3 data-i18n="step5.title"></h3>
+          <p data-i18n="step5.text"></p>
+          <p class="lang-secondary" data-i18n-sec="step5.text"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== СЛАЙД 3: РЕЗУЛЬТАТЫ ================== -->
+  <section class="slide slide-results" data-theme="dark">
+    <div class="slide-inner">
+      <div class="slide-eyebrow" data-reveal>
+        <span class="dot-red"></span>
+        <span data-i18n="results.eyebrow"></span>
+      </div>
+
+      <h2 class="slide-title" data-reveal data-i18n="results.title"></h2>
+
+      <div class="metrics">
+        <div class="metric" data-reveal>
+          <div class="metric-num">50<span class="metric-unit">%</span></div>
+          <div class="metric-label" data-i18n="results.m1.label"></div>
+        </div>
+        <div class="metric metric-accent" data-reveal>
+          <div class="metric-num">+20</div>
+          <div class="metric-label" data-i18n="results.m2.label"></div>
+        </div>
+        <div class="metric" data-reveal>
+          <div class="metric-num">★</div>
+          <div class="metric-label" data-i18n="results.m3.label"></div>
+        </div>
+      </div>
+
+      <div class="slide-footer" data-reveal>
+        <span data-i18n="results.footer"></span>
+        <span class="lang-secondary" data-i18n-sec="results.footer"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== СЛАЙД 3.5: ОБЛАКО КЛИЕНТОВ ================== -->
+  <section class="slide slide-clients" data-theme="light">
+    <div class="slide-inner">
+      <div class="slide-eyebrow" data-reveal>
+        <span class="dot-red"></span>
+        <span data-i18n="clients.eyebrow"></span>
+      </div>
+
+      <h2 class="slide-title" data-reveal data-i18n="clients.title"></h2>
+
+      <p class="clients-lead" data-reveal data-i18n="clients.lead"></p>
+
+      <div class="logo-cloud" id="logoCloud">
+        <span class="chip chip-xl chip-accent" data-reveal>Мираторг</span>
+        <span class="chip chip-l"   data-reveal>Русагро</span>
+        <span class="chip chip-m"   data-reveal>ЭФКО</span>
+        <span class="chip chip-l chip-accent" data-reveal>Черкизово</span>
+        <span class="chip chip-m"   data-reveal>АгроТерра</span>
+        <span class="chip chip-xl"  data-reveal>Ростсельмаш</span>
+        <span class="chip chip-s"   data-reveal>Степь</span>
+        <span class="chip chip-m"   data-reveal>Содружество</span>
+        <span class="chip chip-l chip-accent" data-reveal>Курс&nbsp;Агротерминал</span>
+        <span class="chip chip-s"   data-reveal>Юг&nbsp;Руси</span>
+        <span class="chip chip-m"   data-reveal>Маслопродукт</span>
+        <span class="chip chip-s"   data-reveal>Прогресс&nbsp;Агро</span>
+        <span class="chip chip-l"   data-reveal>ОЗК</span>
+        <span class="chip chip-m"   data-reveal>Био-Тон</span>
+        <span class="chip chip-s"   data-reveal>Грейн&nbsp;Холдинг</span>
+        <span class="chip chip-m"   data-reveal>Астон</span>
+        <span class="chip chip-s"   data-reveal>Каргилл</span>
+        <span class="chip chip-l"   data-reveal>Доминант</span>
+        <span class="chip chip-s"   data-reveal>КЗС</span>
+        <span class="chip chip-m"   data-reveal>Белгранкорм</span>
+        <span class="chip chip-s"   data-reveal>Агроком</span>
+        <span class="chip chip-m"   data-reveal>Тамбовский&nbsp;Бекон</span>
+        <span class="chip chip-s"   data-reveal>ТД&nbsp;Грейн</span>
+        <span class="chip chip-l chip-plus" data-reveal data-i18n="clients.plus"></span>
+      </div>
+
+      <div class="slide-footer" data-reveal>
+        <span data-i18n="clients.footer"></span>
+        <span class="lang-secondary" data-i18n-sec="clients.footer"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== СЛАЙД 4: МЕТОД ================== -->
+  <section class="slide slide-method" data-theme="light">
+    <div class="slide-inner">
+      <div class="slide-eyebrow" data-reveal>
+        <span class="dot-red"></span>
+        <span data-i18n="method.eyebrow"></span>
+      </div>
+
+      <h2 class="slide-title" data-reveal data-i18n="method.title"></h2>
+
+      <ol class="method-steps">
+        <li data-reveal>
+          <div class="step-num">01</div>
+          <h4 data-i18n="method.s1.h"></h4>
+          <p data-i18n="method.s1.p"></p>
+        </li>
+        <li data-reveal>
+          <div class="step-num">02</div>
+          <h4 data-i18n="method.s2.h"></h4>
+          <p data-i18n="method.s2.p"></p>
+        </li>
+        <li data-reveal>
+          <div class="step-num">03</div>
+          <h4 data-i18n="method.s3.h"></h4>
+          <p data-i18n="method.s3.p"></p>
+        </li>
+        <li data-reveal>
+          <div class="step-num">04</div>
+          <h4 data-i18n="method.s4.h"></h4>
+          <p data-i18n="method.s4.p"></p>
+        </li>
+        <li data-reveal>
+          <div class="step-num">05</div>
+          <h4 data-i18n="method.s5.h"></h4>
+          <p data-i18n="method.s5.p"></p>
+        </li>
+        <li class="step-final" data-reveal>
+          <div class="step-num">06</div>
+          <h4 data-i18n="method.s6.h"></h4>
+          <p data-i18n="method.s6.p"></p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================== СЛАЙД 5: ТЕХ ОТДЕЛ ================== -->
+  <section class="slide slide-tech" data-theme="light">
+    <div class="slide-inner two-col">
+      <div class="col-text">
+        <div class="slide-eyebrow" data-reveal>
+          <span class="dot-red"></span>
+          <span data-i18n="tech.eyebrow"></span>
+        </div>
+
+        <h2 class="slide-title" data-reveal data-i18n="tech.title"></h2>
+
+        <p class="lead" data-reveal data-i18n="tech.lead"></p>
+        <p class="lead lang-secondary" data-i18n-sec="tech.lead"></p>
+
+        <div class="tech-quote" data-reveal data-i18n="tech.quote"></div>
+      </div>
+
+      <div class="col-icons">
+        <div class="tech-item" data-reveal>
+          <div class="ti-icon">🌾</div>
+          <div>
+            <strong data-i18n="tech.i1.t"></strong>
+            <small class="lang-secondary" data-i18n-sec="tech.i1.t"></small>
+          </div>
+        </div>
+        <div class="tech-item" data-reveal>
+          <div class="ti-icon">⚙️</div>
+          <div>
+            <strong data-i18n="tech.i2.t"></strong>
+            <small class="lang-secondary" data-i18n-sec="tech.i2.t"></small>
+          </div>
+        </div>
+        <div class="tech-item" data-reveal>
+          <div class="ti-icon">🚜</div>
+          <div>
+            <strong data-i18n="tech.i3.t"></strong>
+            <small class="lang-secondary" data-i18n-sec="tech.i3.t"></small>
+          </div>
+        </div>
+        <div class="tech-item" data-reveal>
+          <div class="ti-icon">🏭</div>
+          <div>
+            <strong data-i18n="tech.i4.t"></strong>
+            <small class="lang-secondary" data-i18n-sec="tech.i4.t"></small>
+          </div>
+        </div>
+        <div class="tech-item" data-reveal>
+          <div class="ti-icon">⛏️</div>
+          <div>
+            <strong data-i18n="tech.i5.t"></strong>
+            <small class="lang-secondary" data-i18n-sec="tech.i5.t"></small>
+          </div>
+        </div>
+        <div class="tech-item" data-reveal>
+          <div class="ti-icon">🥛</div>
+          <div>
+            <strong data-i18n="tech.i6.t"></strong>
+            <small class="lang-secondary" data-i18n-sec="tech.i6.t"></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== СЛАЙД 6: ЦИФРОВАЯ СТРАТЕГИЯ ================== -->
+  <section class="slide slide-digital" data-theme="dark">
+    <div class="slide-inner">
+      <div class="slide-eyebrow" data-reveal>
+        <span class="dot-red"></span>
+        <span data-i18n="digital.eyebrow"></span>
+      </div>
+
+      <h2 class="slide-title" data-reveal data-i18n="digital.title"></h2>
+
+      <div class="digital-grid">
+        <div class="digital-card" data-reveal>
+          <div class="dc-icon">🌐</div>
+          <h4 data-i18n="digital.c1.h"></h4>
+          <p data-i18n="digital.c1.p"></p>
+        </div>
+        <div class="digital-card" data-reveal>
+          <div class="dc-icon">🎬</div>
+          <h4 data-i18n="digital.c2.h"></h4>
+          <p data-i18n="digital.c2.p"></p>
+        </div>
+        <div class="digital-card" data-reveal>
+          <div class="dc-icon">📱</div>
+          <h4 data-i18n="digital.c3.h"></h4>
+          <p data-i18n="digital.c3.p"></p>
+        </div>
+        <div class="digital-card" data-reveal>
+          <div class="dc-icon">🎯</div>
+          <h4 data-i18n="digital.c4.h"></h4>
+          <p data-i18n="digital.c4.p"></p>
+        </div>
+        <div class="digital-card" data-reveal>
+          <div class="dc-icon">🤖</div>
+          <h4 data-i18n="digital.c5.h"></h4>
+          <p data-i18n="digital.c5.p"></p>
+        </div>
+        <div class="digital-card" data-reveal>
+          <div class="dc-icon">📊</div>
+          <h4 data-i18n="digital.c6.h"></h4>
+          <p data-i18n="digital.c6.p"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== СЛАЙД 7: РАЗВИЛКА ================== -->
+  <section class="slide slide-fork" data-theme="dark">
+    <div class="slide-inner">
+      <div class="slide-eyebrow" data-reveal>
+        <span class="dot-red"></span>
+        <span data-i18n="fork.eyebrow"></span>
+      </div>
+
+      <h2 class="slide-title" data-reveal data-i18n="fork.title"></h2>
+
+      <div class="fork-grid">
+        <div class="fork-col fork-positive" data-reveal>
+          <div class="fork-head">
+            <div class="fork-check">✓</div>
+            <h3 data-i18n="fork.pos.title"></h3>
+          </div>
+          <ul>
+            <li data-i18n="fork.pos.i1"></li>
+            <li data-i18n="fork.pos.i2"></li>
+            <li data-i18n="fork.pos.i3"></li>
+            <li data-i18n="fork.pos.i4"></li>
+            <li data-i18n="fork.pos.i5"></li>
+          </ul>
+        </div>
+
+        <div class="fork-col fork-negative" data-reveal>
+          <div class="fork-head">
+            <div class="fork-cross">×</div>
+            <h3 data-i18n="fork.neg.title"></h3>
+          </div>
+          <ul>
+            <li data-i18n="fork.neg.i1"></li>
+            <li data-i18n="fork.neg.i2"></li>
+            <li data-i18n="fork.neg.i3"></li>
+            <li data-i18n="fork.neg.i4"></li>
+            <li data-i18n="fork.neg.i5"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== СЛАЙД 8: ФИНАЛ / CTA ================== -->
+  <section class="slide slide-final" data-theme="dark">
+    <div class="slide-inner">
+      <div class="final-eyebrow" data-reveal>
+        <span class="dot-red"></span>
+        <span data-i18n="final.eyebrow"></span>
+      </div>
+
+      <h2 class="final-title" data-reveal data-i18n="final.title"></h2>
+
+      <div class="final-zh lang-secondary" data-reveal data-i18n-sec="final.title"></div>
+
+      <div class="final-points">
+        <div class="final-point" data-reveal data-i18n="final.p1"></div>
+        <div class="final-point" data-reveal data-i18n="final.p2"></div>
+        <div class="final-point" data-reveal data-i18n="final.p3"></div>
+      </div>
+
+      <div class="final-signature" data-reveal>
+        <div class="sig-name" data-i18n="final.sig.name"></div>
+        <div class="sig-cta">
+          <span data-i18n="final.sig.cta"></span>
+          <span class="lang-secondary" data-i18n-sec="final.sig.cta"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/secrets.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

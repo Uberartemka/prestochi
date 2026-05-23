@@ -1,0 +1,11 @@
+# Локальные секреты (Mapbox token и т.п.)
+js/secrets.js
+
+# Исходные документы
+*.docx
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
