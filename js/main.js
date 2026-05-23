@@ -190,17 +190,39 @@
     legendItems.forEach((li, i) => li.classList.toggle('active', set.has(i)));
   }
 
-  // ===== Счётчик 3 → 85 =====
-  let counterAnimated = false;
+  // ===== Счётчик закрашенных регионов по фазам =====
+  // На каждой сцене считаем кумулятивно сколько регионов окрашено и плавно анимируем.
+  const TOTAL_REGIONS = 85;
+  const phasesCfg = (window.PRESTOCHI_CONFIG && window.PRESTOCHI_CONFIG.phases) || {};
+  const phaseSizes = {
+    current: (phasesCfg.current || []).length,            // 3
+    phase1:  (phasesCfg.phase1  || []).length,            // ~9
+    phase2:  (phasesCfg.phase2  || []).length,            // ~40
+  };
+  // phase3 — все остальные регионы РФ
+  phaseSizes.phase3 = Math.max(
+    0,
+    TOTAL_REGIONS - phaseSizes.current - phaseSizes.phase1 - phaseSizes.phase2
+  );
+
+  function sceneCount(sceneIdx) {
+    const scene = (window.PRESTOCHI_CONFIG.scenes || [])[sceneIdx];
+    if (!scene || !scene.activePhases) return 0;
+    return scene.activePhases.reduce((sum, p) => sum + (phaseSizes[p] || 0), 0);
+  }
+
+  // Инициализируем счётчик нулём (на сцене 0 ничего не закрашено)
+  if (counterEl) counterEl.textContent = '0';
+  let currentCount = 0;
+
   window.addEventListener('cs:scene', (e) => {
-    const idx = e.detail.index;
-    if (idx === 4 && !counterAnimated) {
-      counterAnimated = true;
-      animateCounter(counterEl, 3, 85, 1600);
-    } else if (idx < 4 && counterAnimated) {
-      counterAnimated = false;
-      animateCounter(counterEl, parseInt(counterEl.textContent, 10) || 85, 3, 800);
-    }
+    const target = sceneCount(e.detail.index);
+    if (target === currentCount) return;
+    // Длительность пропорциональна разнице — большие скачки анимируются дольше
+    const delta = Math.abs(target - currentCount);
+    const duration = Math.min(1800, 500 + delta * 25);
+    animateCounter(counterEl, currentCount, target, duration);
+    currentCount = target;
   });
   // ===== REVEAL: stagger fade-in для всех [data-reveal] =====
   // Группируем по родительской секции, чтобы stagger считался локально на каждом слайде.
@@ -225,6 +247,39 @@
     { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
   );
   document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+
+  // ===== COUNT-UP: метрики слайда «Результаты» 0 → N =====
+  const metricObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        const to = parseInt(el.dataset.countTo, 10) || 0;
+        const prefix = el.dataset.countPrefix || '';
+        const suffix = el.dataset.countSuffix || '';
+        const unitHTML = suffix
+          ? `<span class="metric-unit">${suffix}</span>`
+          : '';
+        const duration = 1500;
+        const t0 = performance.now();
+        function tick(now) {
+          const p = Math.min(1, (now - t0) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const v = Math.round(to * eased);
+          el.innerHTML = `${prefix}${v}${unitHTML}`;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        // Небольшая задержка чтобы совпало с reveal-fade родительского .metric
+        setTimeout(() => requestAnimationFrame(tick), 200);
+      });
+    },
+    { threshold: 0.5 }
+  );
+  document
+    .querySelectorAll('.metric-num[data-count-to]')
+    .forEach((el) => metricObserver.observe(el));
 
   function animateCounter(el, from, to, duration) {
     const t0 = performance.now();

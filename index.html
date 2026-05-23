@@ -63,14 +63,13 @@
 
         <div class="counter">
           <div class="counter-block">
-            <span class="num" id="counter-current">3</span>
-            <span class="label" data-i18n="map.counter.today"></span>
+            <span class="num" id="counter-current">0</span>
           </div>
           <div class="counter-arrow">→</div>
           <div class="counter-block highlight">
             <span class="num">85</span>
-            <span class="label" data-i18n="map.counter.goal"></span>
           </div>
+          <div class="counter-suffix" data-i18n="map.counter.regions"></div>
         </div>
 
         <ul class="legend">
@@ -166,11 +165,11 @@
 
       <div class="metrics">
         <div class="metric" data-reveal>
-          <div class="metric-num">50<span class="metric-unit">%</span></div>
+          <div class="metric-num" data-count-to="50" data-count-suffix="%">0<span class="metric-unit">%</span></div>
           <div class="metric-label" data-i18n="results.m1.label"></div>
         </div>
         <div class="metric metric-accent" data-reveal>
-          <div class="metric-num">+20</div>
+          <div class="metric-num" data-count-to="20" data-count-prefix="+">+0</div>
           <div class="metric-label" data-i18n="results.m2.label"></div>
         </div>
         <div class="metric" data-reveal>
@@ -198,17 +197,49 @@
 
       <p class="clients-lead" data-reveal data-i18n="clients.lead"></p>
 
+      <div class="client-logos client-logos--light" data-reveal>
+        <div class="client-logo">
+          <img src="assets/logos/Logo-miratorg.png" alt="Мираторг" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
+          <span class="client-fallback">Мираторг</span>
+        </div>
+        <div class="client-logo">
+          <img src="assets/logos/rusagro.svg" alt="Русагро" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
+          <span class="client-fallback">Русагро</span>
+        </div>
+        <div class="client-logo">
+          <img src="assets/logos/cherkizovo.svg" alt="Черкизово" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
+          <span class="client-fallback">Черкизово</span>
+        </div>
+        <div class="client-logo">
+          <img src="assets/logos/efko.svg" alt="ЭФКО" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
+          <span class="client-fallback">ЭФКО</span>
+        </div>
+        <div class="client-logo">
+          <img src="assets/logos/rostselmash.svg" alt="Ростсельмаш" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
+          <span class="client-fallback">Ростсельмаш</span>
+        </div>
+        <div class="client-logo">
+          <img src="assets/logos/kurs.svg" alt="Курс Агротерминал" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
+          <span class="client-fallback">Курс&nbsp;Агротерминал</span>
+        </div>
+        <div class="client-logo">
+          <img src="assets/logos/prodimex.svg" alt="Продимекс" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
+          <span class="client-fallback">Продимекс</span>
+        </div>
+        <div class="client-logo">
+          <img src="assets/logos/sodruzhestvo.svg" alt="Содружество" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
+          <span class="client-fallback">Содружество</span>
+        </div>
+      </div>
+
+      <div class="cloud-divider" data-reveal>
+        <span data-i18n="clients.and_more"></span>
+      </div>
+
       <div class="logo-cloud" id="logoCloud">
-        <span class="chip chip-xl chip-accent" data-reveal>Мираторг</span>
-        <span class="chip chip-l"   data-reveal>Русагро</span>
-        <span class="chip chip-m"   data-reveal>ЭФКО</span>
-        <span class="chip chip-l chip-accent" data-reveal>Черкизово</span>
-        <span class="chip chip-m"   data-reveal>АгроТерра</span>
-        <span class="chip chip-xl"  data-reveal>Ростсельмаш</span>
-        <span class="chip chip-s"   data-reveal>Степь</span>
-        <span class="chip chip-m"   data-reveal>Содружество</span>
-        <span class="chip chip-l chip-accent" data-reveal>Курс&nbsp;Агротерминал</span>
-        <span class="chip chip-s"   data-reveal>Юг&nbsp;Руси</span>
+        <span class="chip chip-l"   data-reveal>АгроТерра</span>
+        <span class="chip chip-m"   data-reveal>Степь</span>
+        <span class="chip chip-l"   data-reveal>Юг&nbsp;Руси</span>
         <span class="chip chip-m"   data-reveal>Маслопродукт</span>
         <span class="chip chip-s"   data-reveal>Прогресс&nbsp;Агро</span>
         <span class="chip chip-l"   data-reveal>ОЗК</span>

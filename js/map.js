@@ -41,6 +41,15 @@
   };
 
   map.on('load', async () => {
+    // Скрыть лейблы стран/городов/мест — они светлые и пробиваются сквозь dim-слой.
+    // Оставляем только подписи водоёмов и природных объектов (по желанию — тоже можно скрыть).
+    const HIDE_PATTERNS = /country-label|state-label|settlement|place-|continent/i;
+    map.getStyle().layers.forEach((l) => {
+      if (l.type === 'symbol' && HIDE_PATTERNS.test(l.id)) {
+        map.setLayoutProperty(l.id, 'visibility', 'none');
+      }
+    });
+
     let raw;
     try {
       const res = await fetch(cfg.regionsGeoJsonUrl);
@@ -162,6 +171,31 @@
       );
     });
 
+    // Затемнение всего мира кроме РФ — большой прямоугольник под слоем регионов.
+    // Российские регионы рисуются поверх с fill-opacity:1 ⇒ остаются яркими.
+    map.addSource('world-mask', {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Polygon',
+          coordinates: [[
+            [-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85],
+          ]],
+        },
+      },
+    });
+    map.addLayer({
+      id: 'world-dim',
+      type: 'fill',
+      source: 'world-mask',
+      paint: {
+        'fill-color': '#0B1220',
+        'fill-opacity': 0.55,
+      },
+    }, getFirstSymbolLayerId());
+
     // Заливка регионов — цвет через feature-state ⇒ работает fill-color-transition
     map.addLayer({
       id: 'regions-fill',
@@ -177,7 +211,7 @@
           'phase3',  COLORS.phase3,
           /* base */ COLORS.base,
         ],
-        'fill-opacity': 0.85,
+        'fill-opacity': 1,
         'fill-color-transition': { duration: 1200, delay: 0 },
         'fill-opacity-transition': { duration: 1200, delay: 0 },
       },

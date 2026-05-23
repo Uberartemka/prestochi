@@ -97,6 +97,98 @@ body.theme-dark  .top-bar { color: #FFFFFF; }
 body.theme-light .top-bar { color: var(--ink); }
 
 /* ============================================
+   CLIENT LOGOS — топ-партнёры на слайде клиентов
+   ============================================ */
+.client-logos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 20px;
+  align-items: stretch;
+  margin: 32px auto 28px;
+  max-width: 1100px;
+}
+.client-logo {
+  position: relative;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 14px;
+  overflow: hidden;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.client-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0.75;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+.client-fallback {
+  display: none;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.client-logo.is-empty .client-fallback {
+  display: inline;
+}
+
+/* Светлый вариант — на белом фоне slide-clients (тёмный монохром) */
+.client-logos--light .client-logo {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+.client-logos--light .client-logo:hover {
+  background: #fff;
+  border-color: rgba(200, 16, 46, 0.35);
+  box-shadow: 0 12px 28px rgba(200, 16, 46, 0.12);
+  transform: translateY(-4px);
+}
+.client-logos--light .client-logo img {
+  /* Чёрно-белый монохром, лента выглядит единой даже с разноцветными лого */
+  filter: grayscale(1) contrast(1.05);
+  opacity: 0.65;
+}
+.client-logos--light .client-logo:hover img {
+  filter: none;
+  opacity: 1;
+}
+.client-logos--light .client-fallback {
+  color: var(--ink-2);
+}
+
+/* Разделитель между топ-логотипами и облаком чипов */
+.cloud-divider {
+  margin: 28px auto 8px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  opacity: 0.55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  max-width: 720px;
+}
+.cloud-divider::before,
+.cloud-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}
+
+/* ============================================
    I18N — переключение шрифтов и вторичный текст
    ============================================ */
 body.lang-zh {
@@ -317,12 +409,15 @@ h3 + .lang-secondary {
   font-variant-numeric: tabular-nums;
 }
 .counter-block.highlight .num { color: var(--c-current); }
-.counter-block .label {
-  display: block; font-size: 10px; color: var(--muted); margin-top: 8px;
-  line-height: 1.4; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;
-}
-.counter-block .label .zh { text-transform: none; letter-spacing: 0.05em; }
 .counter-arrow { font-size: 22px; color: var(--muted); font-weight: 300; }
+.counter-suffix {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  padding-left: 6px;
+}
 
 .legend { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .legend li {
@@ -818,20 +913,30 @@ h3 + .lang-secondary {
 /* ============================================
    СЛАЙД 3.5 — ОБЛАКО ЛОГОТИПОВ КЛИЕНТОВ
    ============================================ */
+/* Компактная плотность — чтобы всё содержимое влезало в 100vh при snap-скролле */
+.slide-clients { padding: 70px 60px 40px; }
+.slide-clients .slide-inner { gap: 18px; }
+.slide-clients .slide-title { font-size: 38px; line-height: 1.15; }
 .slide-clients .clients-lead {
-  font-size: 17px;
-  line-height: 1.55;
+  font-size: 15px;
+  line-height: 1.5;
   color: var(--ink-2);
   margin: 0;
   max-width: 820px;
 }
+.slide-clients .client-logos {
+  margin: 8px auto 4px;
+}
+.slide-clients .client-logo { height: 58px; padding: 10px 16px; border-radius: 12px; }
+.slide-clients .cloud-divider { margin: 12px auto 6px; font-size: 11px; }
+
 .logo-cloud {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px 16px;
+  gap: 8px 10px;
   align-items: center;
   justify-content: center;
-  padding: 40px 0 24px;
+  padding: 4px 0 8px;
   max-width: 1180px;
   margin: 0 auto;
   perspective: 800px;
@@ -871,6 +976,13 @@ h3 + .lang-secondary {
 .chip-m  { font-size: 15px; padding: 12px 22px; }
 .chip-l  { font-size: 18px; padding: 14px 26px; font-weight: 800; }
 .chip-xl { font-size: 22px; padding: 16px 32px; font-weight: 800; letter-spacing: -0.01em; }
+
+/* Компактные размеры в облаке клиентов */
+.slide-clients .chip    { padding: 7px 14px; font-size: 13px; }
+.slide-clients .chip-s  { font-size: 12px; padding: 6px 12px; }
+.slide-clients .chip-m  { font-size: 13px; padding: 7px 14px; }
+.slide-clients .chip-l  { font-size: 14px; padding: 8px 16px; font-weight: 800; }
+.slide-clients .chip-xl { font-size: 16px; padding: 9px 18px; font-weight: 800; }
 
 /* Акцентные «якорные» логотипы — красные, привлекают взгляд */
 .chip-accent {
@@ -944,8 +1056,8 @@ h3 + .lang-secondary {
   100% { box-shadow: 0 0 0 22px rgba(200, 16, 46, 0); }
 }
 
-/* Иконки в digital-card и tech-item — wiggle при hover */
-.digital-card:hover .dc-icon,
+/* Иконки tech-item — wiggle при hover (слайд 5).
+   На digital-card (слайд 6) анимация отключена по запросу. */
 .tech-item:hover .ti-icon {
   animation: iconWiggle 0.6s ease;
 }
