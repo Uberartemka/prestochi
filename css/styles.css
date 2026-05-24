@@ -911,11 +911,451 @@ h3 + .lang-secondary {
 }
 
 /* ============================================
+   СЛАЙД 4 — ГРАФИК РОСТА
+   ============================================ */
+/* === Scrollytelling-обёртка как у карты: sticky-stage + scroll-steps === */
+.growth-section {
+  position: relative;
+  background: var(--bg-light);
+  color: var(--ink);
+}
+.growth-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  padding: 90px 80px 60px;
+  align-items: center;
+  box-sizing: border-box;
+}
+.growth-info { display: flex; flex-direction: column; gap: 22px; }
+.growth-info .slide-title { font-size: 42px; line-height: 1.1; margin: 0; }
+.growth-lead {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0;
+  max-width: 520px;
+}
+
+.growth-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+.growth-stat {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 18px 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+}
+.growth-stat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(200, 16, 46, 0.12);
+}
+.growth-stat-num {
+  font-size: 42px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--c-current);
+  font-variant-numeric: tabular-nums;
+}
+.growth-stat-num .metric-unit {
+  font-size: 22px;
+  opacity: 0.6;
+  margin-left: 2px;
+}
+.growth-stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* === Сам график === */
+.growth-chart {
+  position: relative;
+  width: 100%;
+  transform-origin: 51.4% 44.2%;
+  transition:
+    transform 1.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.0s ease,
+    opacity 1.0s ease;
+}
+.growth-stage { min-width: 0; }
+.growth-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 460px;
+}
+.growth-svg .grid line {
+  stroke: var(--hairline);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+.growth-svg .y-labels text,
+.growth-svg .x-labels text {
+  fill: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-family: var(--font-base, inherit);
+}
+.growth-svg .x-labels text { font-size: 13px; }
+
+/* === Phased reveal: clip-rectangles растут слева направо === */
+/* Стартовое состояние — обе rect шириной 0, в .in-view расширяются */
+.history-clip-rect,
+.future-clip-rect {
+  transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Сцены — управляются JS, навешивает класс на .growth-section */
+.growth-section.scene-1 .history-clip-rect,
+.growth-section.scene-2 .history-clip-rect { width: 250px; }
+.growth-section.scene-2 .future-clip-rect  { width: 250px; }
+
+/* Лёгкая анимация подсветки дна заливки (history) */
+.growth-area-history { opacity: 1; }
+.growth-area-future  { opacity: 1; }
+
+/* Метки годов */
+.growth-svg .x-label-now {
+  fill: var(--c-current) !important;
+  font-weight: 800 !important;
+}
+.growth-svg .x-label-future {
+  opacity: 0.6;
+}
+
+/* Вертикальная отметка «СЕЙЧАС» */
+.today-line {
+  stroke: var(--c-current);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 4;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.today-label {
+  fill: var(--c-current);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.1s;
+}
+.growth-section.scene-1 .today-line,
+.growth-section.scene-1 .today-label,
+.growth-section.scene-2 .today-line,
+.growth-section.scene-2 .today-label { opacity: 1; }
+
+/* Точки */
+.growth-points .point {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 0.3s);
+  transform-origin: center;
+}
+/* Историю показываем на scene-1 и scene-2 */
+.growth-section.scene-1 .growth-points .point:not(.point-future),
+.growth-section.scene-2 .growth-points .point:not(.point-future) {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Будущее — только на scene-2 */
+.growth-section.scene-2 .growth-points .point-future {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: calc((var(--i, 3) - 3) * 0.4s + 0.3s);
+}
+.growth-points circle {
+  fill: #fff;
+  stroke: var(--c-current);
+  stroke-width: 3;
+}
+.growth-points .point-now circle {
+  fill: var(--c-current);
+  stroke: var(--c-current);
+  filter: drop-shadow(0 0 8px rgba(200, 16, 46, 0.45));
+}
+.growth-points .point-future circle {
+  fill: #fff;
+  stroke: var(--c-current);
+  stroke-dasharray: 2 2;
+  stroke-width: 2.5;
+  opacity: 0.95;
+}
+.growth-points .point-target circle {
+  fill: var(--c-current);
+  stroke: var(--c-current);
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 14px rgba(200, 16, 46, 0.7));
+}
+.growth-section.scene-2 .point-target circle {
+  animation: targetPulse 2.2s ease-in-out 1.2s infinite;
+}
+@keyframes targetPulse {
+  0%, 100% { r: 10; filter: drop-shadow(0 0 12px rgba(200, 16, 46, 0.6)); }
+  50%      { r: 13; filter: drop-shadow(0 0 22px rgba(200, 16, 46, 0.9)); }
+}
+.growth-points .point-label {
+  fill: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.growth-points .point-now .point-label,
+.growth-points .point-target .point-label {
+  fill: var(--c-current);
+  font-size: 16px;
+}
+.growth-points .point-future .point-label {
+  opacity: 0.85;
+}
+
+
+/* Легенда график */
+.growth-legend {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.growth-legend-item { display: inline-flex; align-items: center; gap: 8px; }
+.lg-swatch {
+  display: inline-block;
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+}
+.lg-solid  { background: var(--c-current); }
+.lg-dashed {
+  background: repeating-linear-gradient(90deg,
+    var(--c-current) 0 6px,
+    transparent 6px 11px);
+}
+
+/* === Scroll-steps: overlay поверх sticky-stage с карточками === */
+.growth-scroll-steps {
+  position: relative;
+  margin-top: -100vh;
+  pointer-events: none;
+  z-index: 5;
+}
+.growth-step {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 80px 80px;
+  box-sizing: border-box;
+}
+.growth-step-card {
+  pointer-events: auto;
+  max-width: 380px;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 22px 26px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.10);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.growth-step.in-view .growth-step-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+.growth-step-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--c-current);
+  margin-bottom: 8px;
+}
+.growth-step-card h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.growth-step-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* Подсветка stat-карточек по сценам */
+.growth-stat[data-stat-scene] {
+  opacity: 0.4;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s;
+}
+.growth-section.scene-1 .growth-stat[data-stat-scene="1"],
+.growth-section.scene-2 .growth-stat[data-stat-scene="1"],
+.growth-section.scene-2 .growth-stat[data-stat-scene="2"] {
+  opacity: 1;
+}
+.growth-section.scene-2 .growth-stat[data-stat-scene="2"] {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(200, 16, 46, 0.15);
+}
+
+/* Подсветка карточки «цель» в stat-блоке */
+.growth-stat.growth-stat-target {
+  background: linear-gradient(180deg, #fff 0%, rgba(200, 16, 46, 0.06) 100%);
+  border-color: rgba(200, 16, 46, 0.25);
+}
+.growth-stat.growth-stat-target::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px dashed rgba(200, 16, 46, 0.4);
+  pointer-events: none;
+}
+.growth-stat { position: relative; }
+
+
+.growth-axis-title {
+  margin-top: 4px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================
+   СЛАЙД 5 — PROOF BRIDGE: 50% = 200+
+   ============================================ */
+.slide-proof-bridge {
+  padding: 90px 72px 64px;
+  overflow: hidden;
+}
+.proof-inner {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 24px;
+}
+.proof-equation {
+  width: min(1060px, 100%);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 34px;
+  margin: 10px auto 4px;
+}
+.proof-side {
+  position: relative;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(200, 16, 46, 0.10), transparent 58%),
+    #fff;
+  box-shadow: 0 18px 56px rgba(10, 15, 30, 0.08);
+}
+.proof-side-right {
+  border-color: rgba(200, 16, 46, 0.26);
+  box-shadow: 0 24px 70px rgba(200, 16, 46, 0.12);
+}
+.proof-number {
+  font-size: clamp(82px, 12vw, 150px);
+  line-height: 0.9;
+  font-weight: 200;
+  letter-spacing: -0.07em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.proof-number-red {
+  color: var(--c-current);
+  font-weight: 300;
+}
+.proof-label {
+  margin-top: 16px;
+  max-width: 330px;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--ink-2);
+}
+.proof-equals {
+  font-size: 70px;
+  line-height: 1;
+  font-weight: 200;
+  color: rgba(17, 24, 39, 0.24);
+}
+.proof-title {
+  max-width: 960px;
+  margin: 0 auto;
+  font-size: clamp(34px, 4.6vw, 60px);
+  line-height: 1.08;
+}
+.proof-lead {
+  max-width: 860px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.proof-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 980px;
+  margin: 8px auto 0;
+}
+.proof-tags span {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(200, 16, 46, 0.16);
+  background: rgba(200, 16, 46, 0.05);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+/* ============================================
    СЛАЙД 3.5 — ОБЛАКО ЛОГОТИПОВ КЛИЕНТОВ
    ============================================ */
 /* Компактная плотность — чтобы всё содержимое влезало в 100vh при snap-скролле */
-.slide-clients { padding: 70px 60px 40px; }
-.slide-clients .slide-inner { gap: 18px; }
+.slide-clients {
+  padding: 70px 60px 40px;
+  overflow: hidden;
+}
+.slide-clients .slide-inner {
+  position: relative;
+  z-index: 2;
+  gap: 18px;
+}
 .slide-clients .slide-title { font-size: 38px; line-height: 1.15; }
 .slide-clients .clients-lead {
   font-size: 15px;

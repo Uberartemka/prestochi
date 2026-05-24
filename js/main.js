@@ -61,6 +61,10 @@
     document.querySelectorAll('.step').forEach((el) => {
       targets.push(Math.round(el.getBoundingClientRect().top + window.scrollY));
     });
+    // Шаги growth-секции (3 штуки) — каждый 100vh внутри growth-section
+    document.querySelectorAll('.growth-step').forEach((el) => {
+      targets.push(Math.round(el.getBoundingClientRect().top + window.scrollY));
+    });
     // Остальные слайды (3-8): каждый — 100vh секция в потоке после map-section
     document.querySelectorAll('.slide').forEach((el) => {
       targets.push(Math.round(el.getBoundingClientRect().top + window.scrollY));
@@ -224,6 +228,38 @@
     animateCounter(counterEl, currentCount, target, duration);
     currentCount = target;
   });
+
+  // ===== GROWTH: scrollytelling-сцены графика =====
+  const growthSection = document.querySelector('.growth-section');
+  const growthSteps = document.querySelectorAll('.growth-step');
+
+  function activateGrowthScene(index) {
+    if (!growthSection) return;
+    growthSection.classList.toggle('scene-1', index >= 1);
+    growthSection.classList.toggle('scene-2', index >= 2);
+    growthSteps.forEach((el) => {
+      el.classList.toggle('in-view', parseInt(el.dataset.growthScene, 10) === index);
+    });
+  }
+
+  const growthObserver = new IntersectionObserver(
+    (entries) => {
+      let best = null;
+      entries.forEach((e) => {
+        if (e.isIntersecting && (!best || e.intersectionRatio > best.intersectionRatio)) {
+          best = e;
+        }
+      });
+      if (best) activateGrowthScene(parseInt(best.target.dataset.growthScene, 10));
+    },
+    {
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    }
+  );
+  growthSteps.forEach((s) => growthObserver.observe(s));
+  activateGrowthScene(0);
+
   // ===== REVEAL: stagger fade-in для всех [data-reveal] =====
   // Группируем по родительской секции, чтобы stagger считался локально на каждом слайде.
   document.querySelectorAll('.slide, .cover').forEach((section) => {
@@ -278,7 +314,7 @@
     { threshold: 0.5 }
   );
   document
-    .querySelectorAll('.metric-num[data-count-to]')
+    .querySelectorAll('[data-count-to]')
     .forEach((el) => metricObserver.observe(el));
 
   function animateCounter(el, from, to, duration) {
