@@ -136,8 +136,6 @@
       else if (phase1.includes(id))  category = 'phase1';
       else if (phase2.includes(id))  category = 'phase2';
 
-      // Адыгея — анклав внутри Краснодарского края. Сливаем визуально с ним:
-      // та же категория ('current') + флаг чтобы скрыть её границу.
       if (id === 'RU-AD') {
         if (current.includes('RU-KDA')) category = 'current';
         else if (phase1.includes('RU-KDA')) category = 'phase1';
