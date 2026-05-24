@@ -139,7 +139,10 @@
       // Адыгея — анклав внутри Краснодарского края. Сливаем визуально с ним:
       // та же категория ('current') + флаг чтобы скрыть её границу.
       if (id === 'RU-AD') {
-        category = 'current';
+        if (current.includes('RU-KDA')) category = 'current';
+        else if (phase1.includes('RU-KDA')) category = 'phase1';
+        else if (phase2.includes('RU-KDA')) category = 'phase2';
+        else category = 'phase3';
         f.properties.mergeWithNeighbor = 1;
       }
 
@@ -167,7 +170,7 @@
     ruFeatures.forEach((f) => {
       map.setFeatureState(
         { source: 'ru-regions', id: f.id },
-        { activePhase: 'base' }
+        { activePhase: 'base', activeOpacity: 0.58 }
       );
     });
 
@@ -211,9 +214,9 @@
           'phase3',  COLORS.phase3,
           /* base */ COLORS.base,
         ],
-        'fill-opacity': 1,
-        'fill-color-transition': { duration: 1200, delay: 0 },
-        'fill-opacity-transition': { duration: 1200, delay: 0 },
+        'fill-opacity': ['coalesce', ['feature-state', 'activeOpacity'], 0.58],
+        'fill-color-transition': { duration: 1600, delay: 0 },
+        'fill-opacity-transition': { duration: 1600, delay: 0 },
       },
     }, getFirstSymbolLayerId());
 
@@ -245,6 +248,30 @@
     });
 
     let cascadeToken = 0; // отменяем предыдущий каскад при новой сцене
+    const OPACITY_BASE = 0.58;
+    const OPACITY_ACTIVE = 0.96;
+    const OPACITY_MS = 900;
+
+    function setRegionVisualState(f, target, token) {
+      const ref = { source: 'ru-regions', id: f.id };
+      const state = map.getFeatureState(ref) || {};
+      const from = typeof state.activeOpacity === 'number' ? state.activeOpacity : OPACITY_BASE;
+      const to = target === 'base' ? OPACITY_BASE : OPACITY_ACTIVE;
+      const started = performance.now();
+
+      map.setFeatureState(ref, { activePhase: target, activeOpacity: from });
+
+      function tick(now) {
+        if (token !== cascadeToken) return;
+        const t = Math.min(1, (now - started) / OPACITY_MS);
+        const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        const activeOpacity = from + (to - from) * eased;
+        map.setFeatureState(ref, { activePhase: target, activeOpacity });
+        if (t < 1) requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    }
 
     function applyScene(index) {
       if (index === lastSceneIndex) return;
@@ -271,20 +298,14 @@
       if (STEP_MS === 0) {
         ordered.forEach((f) => {
           const target = active.has(f.properties.category) ? f.properties.category : 'base';
-          map.setFeatureState(
-            { source: 'ru-regions', id: f.id },
-            { activePhase: target }
-          );
+          setRegionVisualState(f, target, token);
         });
       } else {
         ordered.forEach((f, k) => {
           const target = active.has(f.properties.category) ? f.properties.category : 'base';
           setTimeout(() => {
             if (token !== cascadeToken) return;
-            map.setFeatureState(
-              { source: 'ru-regions', id: f.id },
-              { activePhase: target }
-            );
+            setRegionVisualState(f, target, token);
           }, k * STEP_MS);
         });
       }

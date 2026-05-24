@@ -165,11 +165,11 @@
 
       <div class="metrics">
         <div class="metric" data-reveal>
-          <div class="metric-num" data-count-to="50" data-count-suffix="%">0<span class="metric-unit">%</span></div>
+          <div class="metric-num" data-count-to="100">0</div>
           <div class="metric-label" data-i18n="results.m1.label"></div>
         </div>
         <div class="metric metric-accent" data-reveal>
-          <div class="metric-num" data-count-to="20" data-count-prefix="+">+0</div>
+          <div class="metric-num" data-count-to="50">0</div>
           <div class="metric-label" data-i18n="results.m2.label"></div>
         </div>
         <div class="metric" data-reveal>
@@ -198,15 +198,15 @@
 
         <div class="growth-stats">
           <div class="growth-stat" data-stat-scene="1">
-            <div class="growth-stat-num" data-count-to="50" data-count-suffix="%">0<span class="metric-unit">%</span></div>
+            <div class="growth-stat-num" data-count-to="100">0</div>
             <div class="growth-stat-label" data-i18n="growth.s1.label"></div>
           </div>
           <div class="growth-stat growth-stat-target" data-stat-scene="2">
-            <div class="growth-stat-num" data-count-to="85" data-count-suffix="%">0<span class="metric-unit">%</span></div>
+            <div class="growth-stat-num" data-count-to="50">0</div>
             <div class="growth-stat-label" data-i18n="growth.s2.label"></div>
           </div>
           <div class="growth-stat">
-            <div class="growth-stat-num" data-count-to="10" data-count-suffix="×">0<span class="metric-unit">×</span></div>
+            <div class="growth-stat-num" data-count-to="1000">0</div>
             <div class="growth-stat-label" data-i18n="growth.s3.label"></div>
           </div>
         </div>
@@ -215,9 +215,9 @@
       <div class="growth-stage">
         <div class="growth-chart">
           <!-- Inline SVG-график.
-               История: 2024=15%, 2025=32%, 2026=50% (СЕЙЧАС).
-               План:    2027=70%, 2028=85%.
-               Y-сетка: 0%→y=300, 25%→234, 50%→168, 75%→102, 100%→36.
+               История: 2024=20 клиентов HHB, 2025=50, 2026=100 попробовали HHB (СЕЙЧАС).
+               Потенциал: 2027=600 текущая база, 2028=1000 ёмкость рынка.
+               Y-сетка: 0→y=300, 500→168, 1000→36.
                X (5 точек): 2024→120, 2025→245, 2026→370 (сейчас), 2027→495, 2028→620. -->
           <svg viewBox="0 0 720 380" preserveAspectRatio="xMidYMid meet" class="growth-svg" aria-hidden="true">
             <defs>
@@ -245,9 +245,9 @@
               <line x1="56" y1="300" x2="700" y2="300"/>
             </g>
             <g class="y-labels">
-              <text x="44" y="40"  text-anchor="end">100%</text>
-              <text x="44" y="172" text-anchor="end">50%</text>
-              <text x="44" y="304" text-anchor="end">0%</text>
+              <text x="44" y="40"  text-anchor="end">1000</text>
+              <text x="44" y="172" text-anchor="end">500</text>
+              <text x="44" y="304" text-anchor="end">0</text>
             </g>
             <g class="x-labels">
               <text x="120" y="332" text-anchor="middle">2024</text>
@@ -263,20 +263,20 @@
             <!-- ИСТОРИЯ -->
             <g clip-path="url(#historyClip)">
               <path class="growth-area-history"
-                    d="M 120,260 C 182,260 182,216 245,216 S 308,168 370,168 L 370,300 L 120,300 Z"
+                    d="M 120,295 C 182,295 182,287 245,287 S 308,274 370,274 L 370,300 L 120,300 Z"
                     fill="url(#growthGrad)" />
               <path class="growth-line-history"
-                    d="M 120,260 C 182,260 182,216 245,216 S 308,168 370,168"
+                    d="M 120,295 C 182,295 182,287 245,287 S 308,274 370,274"
                     fill="none" stroke="#C8102E" stroke-width="3" stroke-linecap="round" />
             </g>
 
             <!-- ПЛАН -->
             <g clip-path="url(#futureClip)">
               <path class="growth-area-future"
-                    d="M 370,168 C 432,168 432,115 495,115 S 558,76 620,76 L 620,300 L 370,300 Z"
+                    d="M 370,274 C 432,274 432,142 495,142 S 558,36 620,36 L 620,300 L 370,300 Z"
                     fill="url(#growthGradFuture)" />
               <path class="growth-line-future"
-                    d="M 370,168 C 432,168 432,115 495,115 S 558,76 620,76"
+                    d="M 370,274 C 432,274 432,142 495,142 S 558,36 620,36"
                     fill="none" stroke="#C8102E" stroke-width="3" stroke-linecap="round"
                     stroke-dasharray="9 7" />
             </g>
@@ -284,24 +284,24 @@
             <!-- Точки -->
             <g class="growth-points">
               <g class="point" style="--i:0">
-                <circle cx="120" cy="260" r="6"/>
-                <text x="120" y="246" text-anchor="middle" class="point-label">15%</text>
+                <circle cx="120" cy="295" r="6"/>
+                <text x="120" y="281" text-anchor="middle" class="point-label">20</text>
               </g>
               <g class="point" style="--i:1">
-                <circle cx="245" cy="216" r="6"/>
-                <text x="245" y="202" text-anchor="middle" class="point-label">32%</text>
+                <circle cx="245" cy="287" r="6"/>
+                <text x="245" y="273" text-anchor="middle" class="point-label">50</text>
               </g>
               <g class="point point-now" style="--i:2">
-                <circle cx="370" cy="168" r="8"/>
-                <text x="370" y="152" text-anchor="middle" class="point-label">50%</text>
+                <circle cx="370" cy="274" r="8"/>
+                <text x="370" y="258" text-anchor="middle" class="point-label">100</text>
               </g>
               <g class="point point-future" style="--i:3">
-                <circle cx="495" cy="115" r="6"/>
-                <text x="495" y="100" text-anchor="middle" class="point-label">70%</text>
+                <circle cx="495" cy="142" r="6"/>
+                <text x="495" y="127" text-anchor="middle" class="point-label">600</text>
               </g>
               <g class="point point-future point-target" style="--i:4">
-                <circle cx="620" cy="76" r="10"/>
-                <text x="620" y="58" text-anchor="middle" class="point-label">85%</text>
+                <circle cx="620" cy="36" r="10"/>
+                <text x="620" y="22" text-anchor="middle" class="point-label">1000</text>
               </g>
             </g>
           </svg>
@@ -353,12 +353,12 @@
 
       <div class="proof-equation" data-reveal>
         <div class="proof-side proof-side-left">
-          <div class="proof-number">50%</div>
+          <div class="proof-number">100</div>
           <div class="proof-label" data-i18n="proof.left.label"></div>
         </div>
         <div class="proof-equals">=</div>
         <div class="proof-side proof-side-right">
-          <div class="proof-number proof-number-red">200+</div>
+          <div class="proof-number proof-number-red">50</div>
           <div class="proof-label" data-i18n="proof.right.label"></div>
         </div>
       </div>
@@ -389,39 +389,10 @@
 
       <p class="clients-lead" data-reveal data-i18n="clients.lead"></p>
 
-      <div class="client-logos client-logos--light" data-reveal>
-        <div class="client-logo">
-          <img src="assets/logos/Logo-miratorg.png" alt="Мираторг" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
-          <span class="client-fallback">Мираторг</span>
-        </div>
-        <div class="client-logo">
-          <img src="assets/logos/rusagro.svg" alt="Русагро" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
-          <span class="client-fallback">Русагро</span>
-        </div>
-        <div class="client-logo">
-          <img src="assets/logos/cherkizovo.svg" alt="Черкизово" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
-          <span class="client-fallback">Черкизово</span>
-        </div>
-        <div class="client-logo">
-          <img src="assets/logos/efko.svg" alt="ЭФКО" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
-          <span class="client-fallback">ЭФКО</span>
-        </div>
-        <div class="client-logo">
-          <img src="assets/logos/rostselmash.svg" alt="Ростсельмаш" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
-          <span class="client-fallback">Ростсельмаш</span>
-        </div>
-        <div class="client-logo">
-          <img src="assets/logos/kurs.svg" alt="Курс Агротерминал" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
-          <span class="client-fallback">Курс&nbsp;Агротерминал</span>
-        </div>
-        <div class="client-logo">
-          <img src="assets/logos/prodimex.svg" alt="Продимекс" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
-          <span class="client-fallback">Продимекс</span>
-        </div>
-        <div class="client-logo">
-          <img src="assets/logos/sodruzhestvo.svg" alt="Содружество" onerror="this.style.display='none'; this.parentNode.classList.add('is-empty');" />
-          <span class="client-fallback">Содружество</span>
-        </div>
+      <div class="logo-cloud supply-cloud" data-reveal>
+        <span class="chip chip-l chip-plus" data-i18n="clients.dir1"></span>
+        <span class="chip chip-l" data-i18n="clients.dir2"></span>
+        <span class="chip chip-l" data-i18n="clients.dir3"></span>
       </div>
 
       <div class="cloud-divider" data-reveal>
@@ -429,22 +400,17 @@
       </div>
 
       <div class="logo-cloud" id="logoCloud">
-        <span class="chip chip-l"   data-reveal>АгроТерра</span>
-        <span class="chip chip-m"   data-reveal>Степь</span>
-        <span class="chip chip-l"   data-reveal>Юг&nbsp;Руси</span>
-        <span class="chip chip-m"   data-reveal>Маслопродукт</span>
-        <span class="chip chip-s"   data-reveal>Прогресс&nbsp;Агро</span>
-        <span class="chip chip-l"   data-reveal>ОЗК</span>
-        <span class="chip chip-m"   data-reveal>Био-Тон</span>
-        <span class="chip chip-s"   data-reveal>Грейн&nbsp;Холдинг</span>
-        <span class="chip chip-m"   data-reveal>Астон</span>
-        <span class="chip chip-s"   data-reveal>Каргилл</span>
-        <span class="chip chip-l"   data-reveal>Доминант</span>
-        <span class="chip chip-s"   data-reveal>КЗС</span>
-        <span class="chip chip-m"   data-reveal>Белгранкорм</span>
-        <span class="chip chip-s"   data-reveal>Агроком</span>
-        <span class="chip chip-m"   data-reveal>Тамбовский&nbsp;Бекон</span>
-        <span class="chip chip-s"   data-reveal>ТД&nbsp;Грейн</span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market1"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market2"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market3"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market4"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market5"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market6"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market7"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market8"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market9"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market10"></span>
+        <span class="chip chip-m" data-reveal data-i18n="clients.market11"></span>
         <span class="chip chip-l chip-plus" data-reveal data-i18n="clients.plus"></span>
       </div>
 
@@ -500,111 +466,33 @@
     </div>
   </section>
 
-  <!-- ================== СЛАЙД 5: ТЕХ ОТДЕЛ ================== -->
-  <section class="slide slide-tech" data-theme="light">
-    <div class="slide-inner two-col">
-      <div class="col-text">
-        <div class="slide-eyebrow" data-reveal>
-          <span class="dot-red"></span>
-          <span data-i18n="tech.eyebrow"></span>
-        </div>
-
-        <h2 class="slide-title" data-reveal data-i18n="tech.title"></h2>
-
-        <p class="lead" data-reveal data-i18n="tech.lead"></p>
-        <p class="lead lang-secondary" data-i18n-sec="tech.lead"></p>
-
-        <div class="tech-quote" data-reveal data-i18n="tech.quote"></div>
-      </div>
-
-      <div class="col-icons">
-        <div class="tech-item" data-reveal>
-          <div class="ti-icon">🌾</div>
-          <div>
-            <strong data-i18n="tech.i1.t"></strong>
-            <small class="lang-secondary" data-i18n-sec="tech.i1.t"></small>
-          </div>
-        </div>
-        <div class="tech-item" data-reveal>
-          <div class="ti-icon">⚙️</div>
-          <div>
-            <strong data-i18n="tech.i2.t"></strong>
-            <small class="lang-secondary" data-i18n-sec="tech.i2.t"></small>
-          </div>
-        </div>
-        <div class="tech-item" data-reveal>
-          <div class="ti-icon">🚜</div>
-          <div>
-            <strong data-i18n="tech.i3.t"></strong>
-            <small class="lang-secondary" data-i18n-sec="tech.i3.t"></small>
-          </div>
-        </div>
-        <div class="tech-item" data-reveal>
-          <div class="ti-icon">🏭</div>
-          <div>
-            <strong data-i18n="tech.i4.t"></strong>
-            <small class="lang-secondary" data-i18n-sec="tech.i4.t"></small>
-          </div>
-        </div>
-        <div class="tech-item" data-reveal>
-          <div class="ti-icon">⛏️</div>
-          <div>
-            <strong data-i18n="tech.i5.t"></strong>
-            <small class="lang-secondary" data-i18n-sec="tech.i5.t"></small>
-          </div>
-        </div>
-        <div class="tech-item" data-reveal>
-          <div class="ti-icon">🥛</div>
-          <div>
-            <strong data-i18n="tech.i6.t"></strong>
-            <small class="lang-secondary" data-i18n-sec="tech.i6.t"></small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== СЛАЙД 6: ЦИФРОВАЯ СТРАТЕГИЯ ================== -->
-  <section class="slide slide-digital" data-theme="dark">
+  <section class="slide slide-moq" data-theme="dark">
     <div class="slide-inner">
       <div class="slide-eyebrow" data-reveal>
         <span class="dot-red"></span>
-        <span data-i18n="digital.eyebrow"></span>
+        <span data-i18n="moq.eyebrow"></span>
       </div>
 
-      <h2 class="slide-title" data-reveal data-i18n="digital.title"></h2>
+      <h2 class="slide-title" data-reveal data-i18n="moq.title"></h2>
 
-      <div class="digital-grid">
-        <div class="digital-card" data-reveal>
-          <div class="dc-icon">🌐</div>
-          <h4 data-i18n="digital.c1.h"></h4>
-          <p data-i18n="digital.c1.p"></p>
+      <div class="metrics">
+        <div class="metric" data-reveal>
+          <div class="metric-num">MOQ</div>
+          <div class="metric-label" data-i18n="moq.m1.label"></div>
         </div>
-        <div class="digital-card" data-reveal>
-          <div class="dc-icon">🎬</div>
-          <h4 data-i18n="digital.c2.h"></h4>
-          <p data-i18n="digital.c2.p"></p>
+        <div class="metric metric-accent" data-reveal>
+          <div class="metric-num">SKU</div>
+          <div class="metric-label" data-i18n="moq.m2.label"></div>
         </div>
-        <div class="digital-card" data-reveal>
-          <div class="dc-icon">📱</div>
-          <h4 data-i18n="digital.c3.h"></h4>
-          <p data-i18n="digital.c3.p"></p>
+        <div class="metric" data-reveal>
+          <div class="metric-num">6→12</div>
+          <div class="metric-label" data-i18n="moq.m3.label"></div>
         </div>
-        <div class="digital-card" data-reveal>
-          <div class="dc-icon">🎯</div>
-          <h4 data-i18n="digital.c4.h"></h4>
-          <p data-i18n="digital.c4.p"></p>
-        </div>
-        <div class="digital-card" data-reveal>
-          <div class="dc-icon">🤖</div>
-          <h4 data-i18n="digital.c5.h"></h4>
-          <p data-i18n="digital.c5.p"></p>
-        </div>
-        <div class="digital-card" data-reveal>
-          <div class="dc-icon">📊</div>
-          <h4 data-i18n="digital.c6.h"></h4>
-          <p data-i18n="digital.c6.p"></p>
-        </div>
+      </div>
+
+      <div class="slide-footer" data-reveal>
+        <span data-i18n="moq.footer"></span>
+        <span class="lang-secondary" data-i18n-sec="moq.footer"></span>
       </div>
     </div>
   </section>

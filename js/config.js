@@ -17,19 +17,17 @@ window.PRESTOCHI_CONFIG = {
 
   // Регионы по фазам (ISO 3166-2 коды)
   phases: {
-    current: ['RU-VOR', 'RU-BEL', 'RU-KDA'],
+    current: ['RU-VOR', 'RU-BEL', 'RU-KRS', 'RU-LIP', 'RU-TAM'],
 
     phase1: [
       'RU-ROS', // Ростовская
       'RU-STA', // Ставропольский край
-      'RU-KRS', // Курская
-      'RU-LIP', // Липецкая
+      'RU-KDA', // Краснодарский край
       'RU-VGG', // Волгоградская
       // RU-AD (Адыгея) — слита с Краснодарским краем в map.js (анклав)
       'RU-KC',  // Карачаево-Черкесия
       'RU-KB',  // Кабардино-Балкария
-      'RU-TAM', // Тамбовская
-      'RU-ORL', // Орловская
+      'RU-ORL',
     ],
 
     phase2: [
