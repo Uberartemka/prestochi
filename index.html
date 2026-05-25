@@ -165,11 +165,11 @@
 
       <div class="metrics">
         <div class="metric" data-reveal>
-          <div class="metric-num" data-count-to="50" data-count-suffix="%">0<span class="metric-unit">%</span></div>
+          <div class="metric-num" data-count-to="20" data-count-suffix="%">0<span class="metric-unit">%</span></div>
           <div class="metric-label" data-i18n="results.m1.label"></div>
         </div>
         <div class="metric metric-accent" data-reveal>
-          <div class="metric-num" data-count-to="20" data-count-prefix="+">+0</div>
+          <div class="metric-num" data-count-to="50">0</div>
           <div class="metric-label" data-i18n="results.m2.label"></div>
         </div>
         <div class="metric" data-reveal>
@@ -215,10 +215,10 @@
       <div class="growth-stage">
         <div class="growth-chart">
           <!-- Inline SVG-график.
-               История: 2024=20 клиентов HHB, 2025=50, 2026=100 попробовали HHB (СЕЙЧАС).
+               История начинается с 2025 года: 2025=20, 2026=100 попробовали HHB (СЕЙЧАС).
                Потенциал: 2027=600 текущая база, 2028=1000 ёмкость рынка.
                Y-сетка: 0→y=300, 500→168, 1000→36.
-               X (5 точек): 2024→120, 2025→245, 2026→370 (сейчас), 2027→495, 2028→620. -->
+               X (4 точки): 2025→120, 2026→370 (сейчас), 2027→495, 2028→620. -->
           <svg viewBox="0 0 720 380" preserveAspectRatio="xMidYMid meet" class="growth-svg" aria-hidden="true">
             <defs>
               <linearGradient id="growthGrad" x1="0" y1="0" x2="0" y2="1">
@@ -250,8 +250,7 @@
               <text x="44" y="304" text-anchor="end">0</text>
             </g>
             <g class="x-labels">
-              <text x="120" y="332" text-anchor="middle">2024</text>
-              <text x="245" y="332" text-anchor="middle">2025</text>
+              <text x="120" y="332" text-anchor="middle">2025</text>
               <text x="370" y="332" text-anchor="middle" class="x-label-now">2026</text>
               <text x="495" y="332" text-anchor="middle" class="x-label-future">2027</text>
               <text x="620" y="332" text-anchor="middle" class="x-label-future">2028</text>
@@ -263,10 +262,10 @@
             <!-- ИСТОРИЯ -->
             <g clip-path="url(#historyClip)">
               <path class="growth-area-history"
-                    d="M 120,295 C 182,295 182,287 245,287 S 308,274 370,274 L 370,300 L 120,300 Z"
+                    d="M 120,295 C 245,295 245,274 370,274 L 370,300 L 120,300 Z"
                     fill="url(#growthGrad)" />
               <path class="growth-line-history"
-                    d="M 120,295 C 182,295 182,287 245,287 S 308,274 370,274"
+                    d="M 120,295 C 245,295 245,274 370,274"
                     fill="none" stroke="#C8102E" stroke-width="3" stroke-linecap="round" />
             </g>
 
@@ -287,19 +286,15 @@
                 <circle cx="120" cy="295" r="6"/>
                 <text x="120" y="281" text-anchor="middle" class="point-label">20</text>
               </g>
-              <g class="point" style="--i:1">
-                <circle cx="245" cy="287" r="6"/>
-                <text x="245" y="273" text-anchor="middle" class="point-label">50</text>
-              </g>
-              <g class="point point-now" style="--i:2">
+              <g class="point point-now" style="--i:1">
                 <circle cx="370" cy="274" r="8"/>
                 <text x="370" y="258" text-anchor="middle" class="point-label">100</text>
               </g>
-              <g class="point point-future" style="--i:3">
+              <g class="point point-future" style="--i:2">
                 <circle cx="495" cy="142" r="6"/>
                 <text x="495" y="127" text-anchor="middle" class="point-label">600</text>
               </g>
-              <g class="point point-future point-target" style="--i:4">
+              <g class="point point-future point-target" style="--i:3">
                 <circle cx="620" cy="36" r="10"/>
                 <text x="620" y="22" text-anchor="middle" class="point-label">1000</text>
               </g>
@@ -344,40 +339,6 @@
   </section>
 
   <!-- ================== СЛАЙД 5: ОБЛАКО КЛИЕНТОВ ================== -->
-  <section class="slide slide-proof-bridge" data-theme="light">
-    <div class="slide-inner proof-inner">
-      <div class="slide-eyebrow" data-reveal>
-        <span class="dot-red"></span>
-        <span data-i18n="proof.eyebrow"></span>
-      </div>
-
-      <div class="proof-equation" data-reveal>
-        <div class="proof-side proof-side-left">
-          <div class="proof-number">50%</div>
-          <div class="proof-label" data-i18n="proof.left.label"></div>
-        </div>
-        <div class="proof-equals">=</div>
-        <div class="proof-side proof-side-right">
-          <div class="proof-number proof-number-red">200+</div>
-          <div class="proof-label" data-i18n="proof.right.label"></div>
-        </div>
-      </div>
-
-      <h2 class="slide-title proof-title" data-reveal data-i18n="proof.title"></h2>
-      <p class="proof-lead" data-reveal data-i18n="proof.lead"></p>
-
-      <div class="proof-tags" data-reveal>
-        <span data-i18n="proof.tag1"></span>
-        <span data-i18n="proof.tag2"></span>
-        <span data-i18n="proof.tag3"></span>
-        <span data-i18n="proof.tag4"></span>
-        <span data-i18n="proof.tag5"></span>
-        <span data-i18n="proof.tag6"></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== СЛАЙД 6: ОБЛАКО КЛИЕНТОВ ================== -->
   <section class="slide slide-clients" data-theme="light">
     <div class="slide-inner">
       <div class="slide-eyebrow" data-reveal>
@@ -620,7 +581,6 @@
       <div class="final-points">
         <div class="final-point" data-reveal data-i18n="final.p1"></div>
         <div class="final-point" data-reveal data-i18n="final.p2"></div>
-        <div class="final-point" data-reveal data-i18n="final.p3"></div>
       </div>
 
       <div class="final-signature" data-reveal>
