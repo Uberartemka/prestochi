@@ -16,7 +16,7 @@ window.PRESTOCHI_I18N = (function () {
     'scroll.cue':      { ru: 'Прокрутите вниз', zh: '向下滚动' },
 
     // ─── COVER ───
-    'cover.eyebrow':   { ru: 'Презентация для фабрики HHB · 2025', zh: '致 HHB 工厂的提案 · 2025' },
+    'cover.eyebrow':   { ru: 'Презентация для фабрики HHB · 2026', zh: '致 HHB 工厂的提案 · 2026' },
     'cover.title':     {
       ru: '<span class="cover-line">Развитие бренда</span><span class="cover-line"><em>HHB</em></span><span class="cover-line">в&nbsp;России</span>',
       zh: '<span class="cover-line">HHB 品牌</span><span class="cover-line">在俄罗斯的</span><span class="cover-line"><em>发展</em></span>',
@@ -25,7 +25,7 @@ window.PRESTOCHI_I18N = (function () {
 
     // ─── MAP / INFO PANEL ───
     'map.eyebrow':     { ru: 'География', zh: '业务覆盖范围' },
-    'map.title':       { ru: 'Черноземье —<br />опорный сельхоз регион РФ', zh: '黑土区 —<br />俄罗斯核心农业区' },
+    'map.title':       { ru: 'Черноземье —<br />опорный сельскохозяйственный регион РФ', zh: '黑土区 —<br />俄罗斯核心农业区' },
     'map.subtitle':    { ru: 'Сильная база в&nbsp;Черноземье и&nbsp;выход на&nbsp;Юг', zh: '立足黑土区，向南部地区发展' },
 
     'map.counter.regions': { ru: 'регионов', zh: '个地区' },
@@ -47,7 +47,7 @@ window.PRESTOCHI_I18N = (function () {
 
     'step2.eyebrow': { ru: '02 · Опорные регионы',  zh: '02 · 核心地区' },
     'step2.title':   { ru: 'Черноземье — опорная территория',  zh: '黑土区 — 核心区域' },
-    'step2.text':    { ru: '<strong>Воронеж, Белгород, Курск, Липецк и&nbsp;Тамбов</strong> — ключевая территория: главный сельхоз регион РФ и&nbsp;база для развития HHB.',
+    'step2.text':    { ru: '<strong>Воронеж, Белгород, Курск, Липецк и&nbsp;Тамбов</strong> — ключевая территория: главный сельскохозяйственный регион РФ и&nbsp;база для развития HHB.',
                        zh: '<strong>沃罗涅日、别尔哥罗德、库尔斯克、利佩茨克和坦波夫</strong>是核心区域：俄罗斯主要农业地区，也是 HHB 发展的基础。' },
 
     'step3.eyebrow': { ru: '03 · Фаза 1',         zh: '03 · 第一阶段' },
