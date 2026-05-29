@@ -16,10 +16,10 @@ window.PRESTOCHI_I18N = (function () {
     'scroll.cue':      { ru: 'Прокрутите вниз', zh: '向下滚动' },
 
     // ─── COVER ───
-    'cover.eyebrow':   { ru: 'Презентация для фабрики FKD · 2026', zh: '致 FKD 工厂的提案 · 2026' },
+    'cover.eyebrow':   { ru: 'Презентация для фабрики HHB · 2026', zh: '致 HHB 工厂的提案 · 2026' },
     'cover.title':     {
-      ru: '<span class="cover-line">Развитие бренда</span><span class="cover-line"><em>FKD</em></span><span class="cover-line">в&nbsp;России</span>',
-      zh: '<span class="cover-line">FKD 品牌</span><span class="cover-line">在俄罗斯的</span><span class="cover-line"><em>发展</em></span>',
+      ru: '<span class="cover-line">Развитие бренда</span><span class="cover-line"><em>HHB</em></span><span class="cover-line">в&nbsp;России</span>',
+      zh: '<span class="cover-line">HHB 品牌</span><span class="cover-line">在俄罗斯的</span><span class="cover-line"><em>发展</em></span>',
     },
     'cover.by':        { ru: 'Презентует <strong>Кристина</strong> · Компонент&nbsp;Сервис', zh: '演讲人：<strong>克里斯季娜</strong> · 康鹏服务' },
 
