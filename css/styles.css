@@ -765,8 +765,8 @@ h3 + .lang-secondary {
   gap: 22px;
 }
 .fork-positive {
-  background: linear-gradient(135deg, rgba(200,16,46,0.15) 0%, rgba(200,16,46,0.05) 100%);
-  border: 1px solid rgba(200,16,46,0.4);
+  background: linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(34,197,94,0.05) 100%);
+  border: 1px solid rgba(34,197,94,0.4);
 }
 .fork-negative {
   background: rgba(255,255,255,0.03);
@@ -782,7 +782,7 @@ h3 + .lang-secondary {
   font-weight: 700;
   flex-shrink: 0;
 }
-.fork-check { background: var(--c-current); color: #fff; }
+.fork-check { background: #22c55e; color: #fff; }
 .fork-cross { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
 .fork-head h3 {
   margin: 0;
@@ -817,7 +817,7 @@ h3 + .lang-secondary {
   background: currentColor;
   opacity: 0.5;
 }
-.fork-positive li::before { background: var(--c-current); opacity: 1; }
+.fork-positive li::before { background: #22c55e; opacity: 1; }
 .fork-col strong { font-weight: 700; }
 
 /* ============================================
@@ -1507,13 +1507,13 @@ h3 + .lang-secondary {
   75%      { transform: rotate(10deg)  scale(1.1); }
 }
 
-/* fork-positive: лёгкое мерцание красной рамки */
+/* fork-positive: лёгкое мерцание зелёной рамки */
 .fork-positive.in-view {
   animation: forkGlow 4s ease-in-out infinite;
 }
 @keyframes forkGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 16, 46, 0); }
-  50%      { box-shadow: 0 0 32px 4px rgba(200, 16, 46, 0.18); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  50%      { box-shadow: 0 0 32px 4px rgba(34, 197, 94, 0.18); }
 }
 
 /* Финальный заголовок — медленное проявление с blur */
