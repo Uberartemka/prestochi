@@ -213,7 +213,7 @@ window.PRESTOCHI_I18N = (function () {
     'final.sub':     { ru: 'За ООО «КС» по&nbsp;всей территории Российской Федерации', zh: '由康鹏服务负责俄罗斯全境' },
 
     'final.p1': { ru: '<strong>Закрепить</strong><br />эксклюзивное дистрибьюторство HHB за ООО «КС»', zh: '<strong>确认</strong><br />康鹏服务为 HHB 独家经销商' },
-    'final.p2': { ru: '<strong>Присвоить</strong><br />сертификат дилера HHB', zh: '<strong>颁发</strong><br />HHB 经销商证书' },
+    'final.p2': { ru: '<strong>Присвоить</strong><br />сертификат эксклюзивного диллера', zh: '<strong>颁发</strong><br />独家经销商证书' },
     'final.p3': { ru: '<strong>Предоставить</strong><br />всю необходимую техническую информацию по&nbsp;подшипникам HHB', zh: '<strong>提供</strong><br />所有必要的 HHB 轴承技术信息' },
 
     'final.sig.name': { ru: 'Кристина<br /><small>Компонент&nbsp;Сервис</small>', zh: '克里斯季娜<br /><small>康鹏服务</small>' },
